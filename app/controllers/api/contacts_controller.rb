@@ -13,8 +13,11 @@ class Api::ContactsController < ApplicationController
       bio: params[:bio],
       middle_name: params[:middle_name]
     )
-    @contact.save
-    render 'show.json.jbuilder'
+    if @contact.save
+      render 'show.json.jbuilder'
+    else
+      render json: {errors: @contact.errors.full_messages}
+    end
   end
 
   def show
