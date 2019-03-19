@@ -1,6 +1,8 @@
 class Api::ContactsController < ApplicationController
   def index
-    @contacts = Contact.all
+    group = Group.find_by(name: params[:group])
+
+    @contacts = group.contacts
     render 'index.json.jbuilder'
 
     # if current_user
