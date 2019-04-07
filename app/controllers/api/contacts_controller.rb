@@ -11,7 +11,8 @@ class Api::ContactsController < ApplicationController
       email: params[:email],
       phone_number: params[:phone_number],
       bio: params[:bio],
-      middle_name: params[:middle_name]
+      middle_name: params[:middle_name],
+      user_id: User.first.id
     )
     if @contact.save
       render 'show.json.jbuilder'
@@ -34,8 +35,9 @@ class Api::ContactsController < ApplicationController
     @contact.phone_number = params[:phone_number] || @contact.phone_number
     @contact.bio = params[:bio] || @contact.bio
     @contact.middle_name = params[:middle_name] || @contact.middle_name
+    @contact.user_id = User.first.id
 
-    @contact.save
+    @contact.save!
     render 'show.json.jbuilder'
   end
 
